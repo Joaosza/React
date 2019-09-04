@@ -30,11 +30,11 @@ export default class Calculadora extends Component {
         this.setState({ resultado: parseInt(this.state.valor1) * parseInt(this.state.valor2) })
     }
 
-    limpar(){
-        this.state({  })
-        this.state({  })
-        this.state({  })
-        this.state({  })
+    limpar() {
+        this.setState({ valor1: '' });
+        this.setState({ valor2: '' });
+        this.setState({ operacao: '' });
+        this.setState({ resultado: 0 });
     }
 
     render() {
@@ -44,13 +44,15 @@ export default class Calculadora extends Component {
                 <TextInput style={[styles.texto]}
                     placeholder='Valor 1'
                     keyboardType='numeric'
+                    value={this.state.valor1}
                     onChangeText={(vl1) => this.setState({ valor1: vl1 })}
                 />
 
                 <TextInput style={[styles.texto2]}
                     placeholder='Valor 2'
                     keyboardType='numeric'
-                    onChangeText={(vl2) => this.setState({ vlaor2: vl2 })}
+                    value={this.state.valor2}
+                    onChangeText={(vl2) => this.setState({ valor2: vl2 })}
                 />
 
                 {/* Primeira Coluna */}
@@ -110,6 +112,15 @@ export default class Calculadora extends Component {
                 <View>
                     <Text style={styles.resultado}>{this.state.resultado}</Text>
                 </View>
+
+                <View>
+                    <TouchableHighlight style={styles.botaoLimpar} onPress={() => { this.limpar(); }}>
+                        <View>
+                            <Text styles={styles.limpar}> Limpar </Text>
+                        </View>
+                    </TouchableHighlight>
+                </View>
+
             </View >
         );
     }
@@ -127,6 +138,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingBottom: 10,
         fontSize: 20
+    },
+    botaoLimpar: {
+        marginTop: 10,
+        borderColor: 'black',
+        borderWidth: 2,
+        backgroundColor: 'blue',
+        borderRadius: 50,
+        padding: 12,
     },
     resultado: {
         marginTop: 10,
