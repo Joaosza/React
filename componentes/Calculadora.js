@@ -11,29 +11,36 @@ export default class Calculadora extends Component {
     }
 
     soma() {
-        this.state({ operacao: '+' })
-        this.state({ resultado: parseInt(this.state.valor1) + parseInt(this.state.valor2) })
+        this.setState({ operacao: '+' })
+        this.setState({ resultado: parseInt(this.state.valor1) + parseInt(this.state.valor2) })
     }
 
     subtrair() {
-        this.state({ operacao: '-' })
-        this.state({ resultado: parseInt(this.state.valor1) - parseInt(this.state.valor2) })
+        this.setState({ operacao: '-' })
+        this.setState({ resultado: parseInt(this.state.valor1) - parseInt(this.state.valor2) })
     }
 
     dividir() {
-        this.state({ operacao: '/' })
-
+        this.setState({ operacao: '/' })
+        this.setState({ resultado: parseInt(this.state.valor1) / parseInt(this.state.valor2) })
     }
 
     multiplicar() {
-        this.state({ operacao: '*' })
+        this.setState({ operacao: '*' })
+        this.setState({ resultado: parseInt(this.state.valor1) * parseInt(this.state.valor2) })
     }
 
+    limpar(){
+        this.state({  })
+        this.state({  })
+        this.state({  })
+        this.state({  })
+    }
 
     render() {
         return (
             <View style={[styles.container]}>
-                <Text style={[ styles.txt ]}>Calculadora em React</Text>
+                <Text style={[styles.txt]}>Calculadora em React</Text>
                 <TextInput style={[styles.texto]}
                     placeholder='Valor 1'
                     keyboardType='numeric'
@@ -46,12 +53,67 @@ export default class Calculadora extends Component {
                     onChangeText={(vl2) => this.setState({ vlaor2: vl2 })}
                 />
 
+                {/* Primeira Coluna */}
+                <View style={{
+                    backgroundColor: '',
+                    alignItems: 'flex-end',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly'
+                }}>
+                    <View style={{
+                        height: 50,
+                        width: 50
+                    }}>
+                        <TouchableHighlight style={styles.botao} onPress={() => { this.soma(); }}>
+                            <View>
+                                <Text style={styles.Button}> + </Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
 
-            </View>
+                    <View style={{
+                        height: 50,
+                        width: 50
+                    }}>
+                        <TouchableHighlight style={styles.botao} onPress={() => { this.subtrair(); }}>
+                            <View>
+                                <Text style={styles.Button}> - </Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+
+                    <View style={{
+                        height: 50,
+                        width: 50
+                    }}>
+                        <TouchableHighlight style={styles.botao} onPress={() => { this.dividir(); }}>
+                            <View>
+                                <Text style={styles.Button}> / </Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+
+                    <View style={{
+                        height: 50,
+                        width: 50
+                    }}>
+                        <TouchableHighlight style={styles.botao} onPress={() => { this.multiplicar(); }}>
+                            <View>
+                                <Text style={styles.Button}> * </Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+
+                </View>
+
+                {/* Segunda coluna */}
+                <View>
+                    <Text style={styles.resultado}>{this.state.resultado}</Text>
+                </View>
+            </View >
         );
     }
 }
-
 
 const styles = StyleSheet.create({
     container: { backgroundColor: 'grey', width: '100%', height: '100%' },
@@ -61,6 +123,13 @@ const styles = StyleSheet.create({
         borderColor: 'black'
     },
     txt: {
+        backgroundColor: 'white',
+        textAlign: 'center',
+        paddingBottom: 10,
+        fontSize: 20
+    },
+    resultado: {
+        marginTop: 10,
         backgroundColor: 'white',
         textAlign: 'center',
         paddingBottom: 10,
@@ -82,12 +151,13 @@ const styles = StyleSheet.create({
         borderColor: 'blue',
         textAlign: 'center',
         marginTop: 10,
+        marginBottom: 20,
         marginLeft: 120,
         fontSize: 20,
         width: 150
     },
     Button: {
-        fontSize: 40,
+        fontSize: 30,
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
